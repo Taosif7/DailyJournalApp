@@ -1,5 +1,6 @@
 package com.androidWebinar.dailyjournalapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO : Launch the new Journal Activity using intent
+                Intent i = new Intent(getApplicationContext(), NewJournalActivity.class);
+                startActivity(i);
                 Log.d("FAB_LOG", "Button Clicked");
             }
         });
