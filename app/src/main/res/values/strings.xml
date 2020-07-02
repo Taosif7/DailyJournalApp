@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Daily Journal App</string>
+    <string name="new_journal_activity_title">Add New Journal</string>
 </resources>
