@@ -22,8 +22,8 @@ public class model_entry {
         this.cal_date = date;
         this.cal_modified = modified;
 
-        this.date = String.format("%04%02%02%02%02", date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DATE), date.get(Calendar.HOUR_OF_DAY), date.get(Calendar.MINUTE));
-        this.modified = String.format("%04%02%02%02%02", modified.get(Calendar.YEAR), modified.get(Calendar.MONTH), modified.get(Calendar.DATE), modified.get(Calendar.HOUR_OF_DAY), modified.get(Calendar.MINUTE));
+        this.date = String.format("%04d%02d%02d%02d%02d", date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DATE), date.get(Calendar.HOUR_OF_DAY), date.get(Calendar.MINUTE));
+        this.modified = String.format("%04d%02d%02d%02d%02d", modified.get(Calendar.YEAR), modified.get(Calendar.MONTH), modified.get(Calendar.DATE), modified.get(Calendar.HOUR_OF_DAY), modified.get(Calendar.MINUTE));
     }
 
     public model_entry(Cursor data) {

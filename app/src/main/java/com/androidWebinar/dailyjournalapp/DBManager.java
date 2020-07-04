@@ -28,8 +28,8 @@ public class DBManager extends SQLiteOpenHelper {
         // Create Entry Table
         sqLiteDatabase.execSQL(
                 "CREATE TABLE " + TABLE_JOURNAL_ENTRY
-                        + "("
-                        + COLUMN_ENTRY_ID + "INTEGER PRIMARY KEY AUTOINCREMENT,"
+                        + " ("
+                        + COLUMN_ENTRY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                         + COLUMN_ENTRY_DATE + " TEXT,"
                         + COLUMN_ENTRY_NOTE + " TEXT,"
                         + COLUMN_ENTRY_EMOJI + " TEXT,"

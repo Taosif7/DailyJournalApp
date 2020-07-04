@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         newJournalBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO : Launch the new Journal Activity using intent
+                // Launch the new Journal Activity using intent
                 Intent i = new Intent(getApplicationContext(), NewJournalActivity.class);
                 startActivity(i);
                 Log.d("FAB_LOG", "Button Clicked");
