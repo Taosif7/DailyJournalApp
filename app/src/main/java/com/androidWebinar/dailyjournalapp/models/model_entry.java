@@ -13,7 +13,7 @@ public class model_entry {
     public int id;
     public String note, emoji, date, modified;
 
-    Calendar cal_date, cal_modified;
+    public Calendar cal_date, cal_modified;
 
     public model_entry(int id, String note, String emoji, Calendar date, Calendar modified) {
         this.id = id;

@@ -23,9 +23,6 @@ public class NewJournalActivity extends AppCompatActivity {
     // Object to store selected date; By-default, its today's date
     Calendar selectedDate = Calendar.getInstance();
 
-    // Array of month names
-    String[] month_names = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
-
     // Entry controller
     entry_controller controller;
 
@@ -45,7 +42,7 @@ public class NewJournalActivity extends AppCompatActivity {
         FloatingActionButton FAB_create = findViewById(R.id.addEntry_create);
 
         // Set selected date to today's date
-        TV_entryDate.setText(String.format("%02d %s %04d", selectedDate.get(Calendar.DATE), month_names[selectedDate.get(Calendar.MONTH)], selectedDate.get(Calendar.YEAR)));
+        TV_entryDate.setText(String.format("%02d %s %04d", selectedDate.get(Calendar.DATE), Constants.month_names[selectedDate.get(Calendar.MONTH)], selectedDate.get(Calendar.YEAR)));
 
         // Show date picker on click of picker LinearLayout
         LL_entryDatePicker.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +55,7 @@ public class NewJournalActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int y, int m, int d) {
                         selectedDate.set(y, m, d);
-                        TV_entryDate.setText(String.format("%02d %s %04d", selectedDate.get(Calendar.DATE), month_names[selectedDate.get(Calendar.MONTH)], selectedDate.get(Calendar.YEAR)));
+                        TV_entryDate.setText(String.format("%02d %s %04d", selectedDate.get(Calendar.DATE), Constants.month_names[selectedDate.get(Calendar.MONTH)], selectedDate.get(Calendar.YEAR)));
                     }
                 }, selectedDate.get(Calendar.YEAR), selectedDate.get(Calendar.MONTH), selectedDate.get(Calendar.DATE));
 

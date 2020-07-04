@@ -48,8 +48,7 @@ public class entry_controller {
      */
     public List<model_entry> getEntries() {
         List<model_entry> entries = new ArrayList<>();
-        Cursor data = dbManager.getReadableDatabase().query(DBManager.TABLE_JOURNAL_ENTRY, null, null, null, null, null, null);
-        data.moveToFirst();
+        Cursor data = dbManager.getReadableDatabase().query(DBManager.TABLE_JOURNAL_ENTRY, null, null, null, null, null, DBManager.COLUMN_ENTRY_DATE + " DESC");
         while (data.moveToNext()) {
             model_entry entry = new model_entry(data);
             entries.add(entry);
