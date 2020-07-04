@@ -13,7 +13,7 @@ public class entry_controller {
     Context context;
     DBManager dbManager;
 
-    entry_controller(Context c) {
+    public entry_controller(Context c) {
         this.context = c;
         this.dbManager = new DBManager(c);
     }

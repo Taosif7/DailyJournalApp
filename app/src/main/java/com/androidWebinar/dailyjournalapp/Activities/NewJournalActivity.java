@@ -1,4 +1,4 @@
-package com.androidWebinar.dailyjournalapp;
+package com.androidWebinar.dailyjournalapp.Activities;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.androidWebinar.dailyjournalapp.Constants;
+import com.androidWebinar.dailyjournalapp.R;
+import com.androidWebinar.dailyjournalapp.entry_controller;
 import com.androidWebinar.dailyjournalapp.models.model_entry;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
