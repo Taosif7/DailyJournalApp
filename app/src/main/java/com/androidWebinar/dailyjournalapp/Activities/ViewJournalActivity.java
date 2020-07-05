@@ -1,10 +1,12 @@
 package com.androidWebinar.dailyjournalapp.Activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -73,7 +75,14 @@ public class ViewJournalActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_edit:
-                // TODO : Launch Edit Activity
+
+                // Launch Edit Activity
+                Intent intent = new Intent(this, NewJournalActivity.class);
+                intent.putExtra(NewJournalActivity.PARAM_JOURNAL_ID, journal.id);
+                startActivity(intent);
+
+                finish();
+
                 break;
             case R.id.menu_delete:
 
@@ -83,6 +92,7 @@ public class ViewJournalActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         controller.removeEntry(journal);
+                        Toast.makeText(ViewJournalActivity.this, "Journal Deleted!", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });

@@ -23,19 +23,23 @@ import java.util.Calendar;
 
 public class NewJournalActivity extends AppCompatActivity {
 
+    // Parameters
+    public static final String PARAM_JOURNAL_ID = "JournalId";
+
     // Object to store selected date; By-default, its today's date
     Calendar selectedDate = Calendar.getInstance();
 
     // Entry controller
     entry_controller controller;
 
+    // Settings
+    boolean EDIT_MODE = false;
+    int JournalId = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_journal);
-
-        // Initialize Controller
-        controller = new entry_controller(this);
 
         // Find Views
         LinearLayout LL_entryDatePicker = findViewById(R.id.addEntry_date_picker);
@@ -43,6 +47,37 @@ public class NewJournalActivity extends AppCompatActivity {
         final EditText ET_entryNote = findViewById(R.id.addEntry_note);
         final RadioGroup RG_entryEmoji = findViewById(R.id.addEntry_emoji);
         FloatingActionButton FAB_create = findViewById(R.id.addEntry_create);
+
+        // Initialize Controller
+        controller = new entry_controller(this);
+
+        // Check if journal Id is provided, if So then its edit mode
+        JournalId = getIntent().getIntExtra(PARAM_JOURNAL_ID, -1);
+        EDIT_MODE = (JournalId != -1);
+
+        // If this is edit mode, then
+        if (EDIT_MODE) {
+            setTitle(R.string.edit_journal_activity_title);
+
+            model_entry entry = controller.getEntry(JournalId);
+            ET_entryNote.setText(entry.note);
+            selectedDate = entry.cal_date;
+
+            // Iterate through all children of RadioGroup
+            for (int i = 0; i < RG_entryEmoji.getChildCount(); i++) {
+
+                // Get radio button at current index
+                RadioButton btn = (RadioButton) RG_entryEmoji.getChildAt(i);
+
+                // If radio button's text is equal to emoji
+                // then get button's Id and set it selected in radioGroup
+                // and break the loop
+                if (btn.getText().equals(entry.emoji)) {
+                    RG_entryEmoji.check(btn.getId());
+                    break;
+                }
+            }
+        }
 
         // Set selected date to today's date
         TV_entryDate.setText(String.format("%02d %s %04d", selectedDate.get(Calendar.DATE), Constants.month_names[selectedDate.get(Calendar.MONTH)], selectedDate.get(Calendar.YEAR)));
@@ -63,7 +98,7 @@ public class NewJournalActivity extends AppCompatActivity {
                 }, selectedDate.get(Calendar.YEAR), selectedDate.get(Calendar.MONTH), selectedDate.get(Calendar.DATE));
 
                 // Set max date to be today : not allowing future date entry
-                picker.getDatePicker().setMaxDate(selectedDate.getTimeInMillis());
+                picker.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis());
 
                 // Show picker
                 picker.show();
@@ -83,11 +118,17 @@ public class NewJournalActivity extends AppCompatActivity {
                 String emoji = selectedRadioBtn.getText().toString();
 
                 // Create Database Entry
-                model_entry entry = new model_entry(-1, note, emoji, selectedDate, Calendar.getInstance());
-                controller.addEntry(entry);
+                model_entry entry = new model_entry(JournalId, note, emoji, selectedDate, Calendar.getInstance());
 
-                // Show message & exit activity
-                Toast.makeText(NewJournalActivity.this, "Entry Added!", Toast.LENGTH_SHORT).show();
+                if (EDIT_MODE) {
+                    // Edit entry & Show message
+                    controller.updateEntry(entry);
+                    Toast.makeText(NewJournalActivity.this, "Journal Updated!", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Add entry & Show message
+                    controller.addEntry(entry);
+                    Toast.makeText(NewJournalActivity.this, "Journal Added!", Toast.LENGTH_SHORT).show();
+                }
                 finish();
             }
         });

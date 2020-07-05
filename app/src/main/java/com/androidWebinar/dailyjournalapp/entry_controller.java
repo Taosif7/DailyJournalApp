@@ -67,4 +67,8 @@ public class entry_controller {
         data.moveToFirst();
         return new model_entry(data);
     }
+
+    public void updateEntry(model_entry entry) {
+        dbManager.getWritableDatabase().update(DBManager.TABLE_JOURNAL_ENTRY, entry.get(), DBManager.COLUMN_ENTRY_ID + "=" + entry.id, null);
+    }
 }
