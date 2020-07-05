@@ -57,7 +57,7 @@ public class EntryListAdapter extends BaseAdapter {
 
         // Set data to views
         TV_date.setText(String.format("%02d", entry.cal_date.get(Calendar.DAY_OF_MONTH)));
-        TV_monthYear.setText(String.format("%s '%02d", Constants.month_names[entry.cal_date.get(Calendar.MONTH)], entry.cal_date.get(Calendar.YEAR) - 2000));
+        TV_monthYear.setText(String.format("%s '%02d", Constants.month_names[entry.cal_date.get(Calendar.MONTH)], entry.cal_date.get(Calendar.YEAR) % 100));
         TV_note.setText(entry.note);
         TV_emoji.setText(entry.emoji);
 

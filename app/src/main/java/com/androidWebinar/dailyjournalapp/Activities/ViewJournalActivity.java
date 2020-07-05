@@ -1,8 +1,13 @@
 package com.androidWebinar.dailyjournalapp.Activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.androidWebinar.dailyjournalapp.Constants;
@@ -17,6 +22,7 @@ public class ViewJournalActivity extends AppCompatActivity {
     public static final String PARAM_ID = "ID";
 
     entry_controller controller;
+    private model_entry journal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +37,7 @@ public class ViewJournalActivity extends AppCompatActivity {
         controller = new entry_controller(this);
 
         // load entry
-        model_entry journal = controller.getEntry(Id);
+        journal = controller.getEntry(Id);
 
         // Find views
         TextView TV_title = findViewById(R.id.viewJournal_title);
@@ -55,5 +61,38 @@ public class ViewJournalActivity extends AppCompatActivity {
                         journal.cal_modified.get(Calendar.MINUTE)
                 ));
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.view_journal_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_edit:
+                // TODO : Launch Edit Activity
+                break;
+            case R.id.menu_delete:
+
+                // Confirm Delete this Journal
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        controller.removeEntry(journal);
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                builder.setMessage("Delete this Journal?");
+
+                builder.show();
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
