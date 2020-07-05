@@ -6,9 +6,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/addEntry_formLayout"
         android:clickable="true"
         android:focusable="true"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="20dp"
@@ -59,12 +60,22 @@
             android:paddingEnd="20dp"
             android:paddingBottom="10dp"
             android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addEntry_formLayout"
+        android:clipToPadding="false"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="15dp"
+        android:scrollbarStyle="outsideInset">
 
         <RadioGroup
             android:id="@+id/addEntry_emoji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:checkedButton="@id/emoji_happy"
             android:orientation="horizontal">
 
@@ -72,6 +83,14 @@
                 android:id="@+id/emoji_happy"
                 style="@style/emoji_radio_btn"
                 android:text="😄" />
+
+            <RadioButton
+                style="@style/emoji_radio_btn"
+                android:text="😁" />
+
+            <RadioButton
+                style="@style/emoji_radio_btn"
+                android:text="🥰" />
 
             <RadioButton
                 style="@style/emoji_radio_btn"
@@ -95,10 +114,12 @@
 
             <RadioButton
                 style="@style/emoji_radio_btn"
+                android:layout_marginEnd="0dp"
                 android:text="😠" />
 
         </RadioGroup>
-    </LinearLayout>
+
+    </HorizontalScrollView>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
