@@ -1,12 +1,14 @@
 package com.androidWebinar.dailyjournalapp.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.androidWebinar.dailyjournalapp.Activities.ViewJournalActivity;
 import com.androidWebinar.dailyjournalapp.Constants;
 import com.androidWebinar.dailyjournalapp.R;
 import com.androidWebinar.dailyjournalapp.models.model_entry;
@@ -44,7 +46,7 @@ public class EntryListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        model_entry entry = entries.get(i);
+        final model_entry entry = entries.get(i);
         view = inflater.inflate(R.layout.entry_list_item, null);
 
         // Find views
@@ -63,7 +65,10 @@ public class EntryListAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO : Open Edit & View activity for this item
+                // Open View activity for this item
+                Intent intent = new Intent(context, ViewJournalActivity.class);
+                intent.putExtra(ViewJournalActivity.PARAM_ID, entry.id);
+                context.startActivity(intent);
             }
         });
 

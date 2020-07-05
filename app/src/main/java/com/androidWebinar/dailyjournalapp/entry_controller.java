@@ -55,4 +55,16 @@ public class entry_controller {
         }
         return entries;
     }
+
+    /**
+     * Method to get single entry by Id from database
+     *
+     * @param Id Entry Id
+     * @return model_entry entry
+     */
+    public model_entry getEntry(int Id) {
+        Cursor data = dbManager.getReadableDatabase().query(DBManager.TABLE_JOURNAL_ENTRY, null, DBManager.COLUMN_ENTRY_ID + "=" + Id, null, null, null, null);
+        data.moveToFirst();
+        return new model_entry(data);
+    }
 }

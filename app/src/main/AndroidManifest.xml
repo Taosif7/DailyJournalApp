@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Activities.ViewJournalActivity"
+            android:label="@string/view_activity_title"
+            android:parentActivityName=".Activities.MainActivity" />
+        <activity
             android:name=".Activities.NewJournalActivity"
             android:label="@string/new_journal_activity_title"
             android:parentActivityName=".Activities.MainActivity" />
